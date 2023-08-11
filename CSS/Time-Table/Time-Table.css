@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    margin-left: 50px;
+    margin-right: 50px;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  h1 {
+    text-align: center;
+    font-style: italic;
+    color: rgb(239, 0, 0);
+    font-size: 50px;
+    }
+  
+  .timetable {
+    width: 95%;
+  }
+  
+  .timetable th, .timetable td {
+    border: 0.5px solid #575757;
+    padding: 10px;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  
+  .timetable th {
+    background-color: rgb(168, 204, 255);
+  }
+
+  .highlight0 {
+    background-color: #ffedb7; 
+    color: #000000;
+    font-weight: bold; 
+  }
+  .highlight1 {
+    background-color: #ffc5b8; 
+    color: #000000;
+    font-weight: bold; 
+  }
+  .highlight2 {
+    background-color: #b9ffb9; 
+    color: #050000;
+    font-weight: bold; 
+  }
+  
+  .highlight3 {
+    background-color: #d2baff; 
+    color: #000000;
+    font-weight: bold; 
+  }
+  
+  
+  
