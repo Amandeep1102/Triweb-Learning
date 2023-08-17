@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle</title>
+</head>
+<body>
+	<h1>HEY HOW ARE YOOU ?</h1>
+	<button>toggle text</button>
+	<script>
+		
+		var h1Tag = document.querySelector('h1');
+		var button1 = document.querySelector('button');
+		
+		button1.onclick = function()
+        {
+			var content = h1Tag.textContent;
+			if(content == 'HEY HOW ARE YOOU ?')
+            {
+				h1Tag.textContent = 'I am awesome !'
+			}
+			else
+            {
+				h1Tag.textContent = 'WBU ?'
+			}
+        }
+	</script>
+</body>
+</html>
