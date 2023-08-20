@@ -1,9 +1,11 @@
 let arr = [1,2,3,4,5];
 
-let arrFilter = arr.filter((element)=>element%2!=0);
+let Filter = arr.filter((element)=>element%2!=0);
 
-console.log(arrFilter);let arr = [1,2,3,4,5];
+console.log(Filter);
 
-let arrFilter = arr.filter((element)=>element%2!=0);
+let arr1 = [1,2,3,4,5];
+
+let arrFilter = arr1.filter((element)=>element%2!=0);
 
 console.log(arrFilter);

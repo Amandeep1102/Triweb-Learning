@@ -1,5 +1,3 @@
-//follow the approach below
-
 
 let xb= 0b0101;
 console.log(xb); //binary
