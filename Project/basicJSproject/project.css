@@ -1,0 +1,67 @@
+.outer_div{
+    background-color: rgb(202, 187, 255);
+    width: 400px;
+    margin: auto;
+}
+
+.user_div{
+    width: 50%;
+    height: 150px;
+}
+
+.red_div{
+    background-color: rgb(255, 58, 58);
+    float:left;
+}
+.green_div{
+    background-color:rgb(62, 158, 62);
+    display: inline-block;
+}
+.blue_div{
+    background-color: rgb(86, 168, 239);
+    float:left;
+}
+.yellow_div{
+    background-color: rgb(247, 247, 105);
+    display: inline-block;
+}
+
+.user_block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.btn_pro{
+    background-color: rgb(105, 94, 224);
+    color: white;
+    border: 2px solid rgb(255, 255, 255);
+    height: 30px;
+    width: 150px;
+    margin: 6px 20px;
+
+}
+
+.input_pro{
+    background-color: rgb(227, 214, 245);
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(86, 86, 86);
+    height: 30px;
+    width: 100px;
+    margin-left:35%;
+    margin-top: 18px;
+}
+
+.my_user{
+    margin: 45px;
+    color: rgb(0, 0, 0);
+    width: 100px;
+    text-align: center;
+    height: 25px;
+    font-size: larger;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    border: 3px solid rgb(225, 179, 255);
+}
