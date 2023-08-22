@@ -1,0 +1,12 @@
+//selecting and using AND OR NOT in WHERE clause
+select * from students where class_id=5 or class_id=6
+select * from students where class_id=5 and mobile='567'
+select * from students where class_id<>5 
+
+//data in ascending order
+select * from students where class_id=5 or class_id=6
+order by class_id
+
+//data in descending order
+select * from students where class_id=5 or class_id=6
+order by class_id desc
