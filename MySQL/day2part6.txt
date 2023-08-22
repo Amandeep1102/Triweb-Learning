@@ -1,0 +1,17 @@
+//using LEFT JOIN
+select c.class_name, t.teacher_name as class_teacher
+from classes c
+left join teachers t 
+on c.teacher_id=t.id
+
+//using RIGHT JOIN
+select c.class_name, t.teacher_name as class_teacher
+from classes c
+right join teachers t 
+on c.teacher_id=t.id
+
+//using INNER JOIN
+select c.class_name, t.teacher_name as class_teacher
+from classes c
+inner join teachers t 
+on c.teacher_id!=t.id
