@@ -1,0 +1,28 @@
+//using UNION
+select student_name from students
+union
+select teacher_name from teachers
+
+//using GROUP BY
+select class_id ,count(*) as numberOfStudents from students
+group by class_id 
+order by numberOfStudents desc
+
+//using HAVING clause
+select class_id ,count(*) as numberOfStudents from students
+group by class_id 
+having numberOfStudents>1
+
+//inserting in other table
+create table teachers_new(
+    id int,
+    teacher_name varchar(20),
+    mobile varchar(10),
+    salary varchar(30)
+)
+
+insert into teachers_new(id,teacher_name,mobile,salary)
+select id,teacher_name,mobile,salary from teachers
+where id=2
+
+select * from teachers_new
