@@ -1,0 +1,10 @@
+//inserting values into tables
+insert into teachers(teacher_name, mobile, salary) values('Amandeep','2303',8000)
+
+//inserting multiple values into multiple tables
+insert into teachers values(1,'rahul','1234',50000),(2,'Vijay','2345',60000),(3,'Ajay','3456',20000)
+insert into classes values(1,'class 8',1),(2,'class 6',2),(3,'class 9',3),(4,'class 5',3),(5,'class 10',1);
+insert into students values(1,'Aastha','1','345'),(2,'Agrim','2','456'),(3,'Priya','5','567'),(4,'Rohan','4','678'),(5,'Alex','5','789')
+
+//update data
+update classes set class_name='class 3' where id=1
