@@ -1,15 +1,17 @@
 const express = require('express');
+
 const userRoute = require('./routers/user');
+
 const app = express();
 
 app.use(express.json());
 
-app.use('/user', userRoute);
-
-app.get('/', (req,res) => {
-    res.send(`Hello!`);
+// localhost:3000/
+app.get('/',(req, res)=>{
+    res.send("I am working");
 });
 
-
+// localhost:3000/user/...
+app.use('/user', userRoute);
 
 app.listen(3000);
