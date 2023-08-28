@@ -4,10 +4,12 @@ const app = express();
 
 app.use(express.json());
 
+app.use('/user', userRoute);
+
 app.get('/', (req,res) => {
     res.send(`Hello!`);
 });
 
-app.use('/user', userRoute);
+
 
 app.listen(3000);
