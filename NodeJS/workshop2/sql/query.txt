@@ -9,3 +9,4 @@ SELECT * FROM `users` WHERE email='adsm@gmail.com';
 UPDATE `users` SET `password`='adsads' WHERE `email`='adsm@gmail.com';
 
 DELETE FROM `users` WHERE `email`='adsm@gmail.com';
+
