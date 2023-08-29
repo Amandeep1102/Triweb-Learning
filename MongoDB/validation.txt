@@ -1,0 +1,28 @@
+validator:{ 
+    $jsonSchema:{
+        bsonType: 'object',
+        required: ['title', 'pname','ownwer,'comments'],
+        properties: { 
+            title: {
+                    bsonType: 'string",
+                    description: 'Title must be string'
+            },
+            pname: {
+                    bsonType: 'string',
+                    description: "pname must be string'
+             },
+            owner:{
+                    bsonType: 'objectId',
+                    description: 'id of customer'
+        },
+        comments: {
+            bsonType: 'string',
+            description: 'comments must be string
+        }
+    }
+  }
+}
+
+db.products.insertone({title: "my product2", pname:"productee2", owner: ObjectId("61b4529eda1b216fb69740f5"), comments: "hi hellow"}) 
+
+db.products.insertMany([{title: "my product2", pname:"product002", owner: ObjectId("61b4529da1b216fb69740f5"), comments:"hi hellow")],[{title: "my product2", pname:"product002", owner: ObjectId("61b4529da1b216fb69740f5"), comments:"hi hellow")])
