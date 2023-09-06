@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerUser = void 0;
+exports.getUser = exports.registerUser = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let resp;
@@ -31,7 +31,13 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     catch (error) {
         //console.log(error);
         resp = { status: "error", message: "Something went wrong", data: {} };
-        res.send(resp);
+        res.status(500).send(resp);
     }
 });
 exports.registerUser = registerUser;
+const getUser = (req, res) => {
+    console.log("query", req.query);
+    console.log("params", req.params);
+    res.send("Done");
+};
+exports.getUser = getUser;

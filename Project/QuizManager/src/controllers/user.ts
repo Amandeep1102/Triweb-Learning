@@ -24,8 +24,14 @@ const registerUser=async (req:Request,res:Response)=>{
     } catch (error) {
         //console.log(error);
         resp={status:"error",message:"Something went wrong",data:{}};
-        res.send(resp);
+        res.status(500).send(resp);
     }
 }
 
-export {registerUser};
+const getUser = (req: Request,res:Response)=>{
+    console.log("query",req.query);
+    console.log("params",req.params);
+    res.send("Done");
+}
+
+export {registerUser, getUser};
