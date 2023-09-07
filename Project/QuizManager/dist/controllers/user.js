@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = exports.registerUser = void 0;
+exports.updateUser = exports.getUser = exports.registerUser = void 0;
 const user_1 = __importDefault(require("../models/user"));
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let resp;
@@ -35,9 +35,46 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.registerUser = registerUser;
-const getUser = (req, res) => {
-    console.log("query", req.query);
-    console.log("params", req.params);
-    res.send("Done");
-};
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp;
+    try {
+        const userId = req.params.userId;
+        const user = yield user_1.default.findById(userId, { name: 1, email: 1 });
+        if (!user) {
+            resp = { status: "error", message: "No user found", data: {} };
+            res.send(resp);
+        }
+        else {
+            resp = { status: "success", message: "User found", data: { user: user } };
+            res.send(resp);
+        }
+    }
+    catch (error) {
+        console.log(error);
+        resp = { status: "error", message: "Something went wrong", data: {} };
+        res.status(500).send(resp);
+    }
+});
 exports.getUser = getUser;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp;
+    try {
+        const userId = req.body._id;
+        const user = yield user_1.default.findById(userId);
+        if (!user) {
+            resp = { status: "error", message: "No user found", data: {} };
+            res.send(resp);
+        }
+        else {
+            user.name = req.body.name;
+            yield user.save();
+            resp = { status: "success", message: "User Updated", data: {} };
+            res.send(resp);
+        }
+    }
+    catch (error) {
+        resp = { status: "error", message: "Something went wrong", data: {} };
+        res.status(500).send(resp);
+    }
+});
+exports.updateUser = updateUser;
