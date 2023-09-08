@@ -1,0 +1,10 @@
+{
+    "env":
+    {
+        "CONNECTION_STRING":"mongodb+srv://Amandeep_singh:newpass@firstproject.t4wd6mg.mongodb.net/myfirstdb?retryWrites=true&w=majority",
+        "PORT":3000
+    },
+    "watch":["src"],
+    "ext":"ts,json",
+    "exec":"ts-node ./src/app.ts"
+}

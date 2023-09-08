@@ -32,6 +32,7 @@ const registerUser=async (req:Request,res:Response)=>{
 const getUser = async (req: Request, res: Response) =>{
     let resp:ReturnResponse;
     try {
+        console.log("change 3");
         const userId = req.params.userId;
         const user = await User.findById(userId,{name:1,email:1});
         if (!user){
