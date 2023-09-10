@@ -6,6 +6,14 @@ import authRoute from './routes/auth';
 
 const app = express();
 
+declare global{
+    namespace Express{
+        interface Request{
+            userId:String;
+        }
+    }
+}
+
 const connectionString = process.env.CONNECTION_STRING  || "" ;
 
 app.use(express.json());
