@@ -1,5 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import bcrypt from 'bcryptjs';
+
+import ProjectError from '../helper/error';
 import User from '../models/user';
 import jwt from 'jsonwebtoken';
 
@@ -9,7 +11,7 @@ interface ReturnResponse{
     data:{}
 }
 
-const registerUser=async (req:Request,res:Response)=>{
+const registerUser=async (req:Request,res:Response,next:NextFunction)=>{
     let resp:ReturnResponse;
     try {
 
@@ -32,10 +34,11 @@ const registerUser=async (req:Request,res:Response)=>{
         //console.log(error);
         resp={status:"error",message:"Something went wrong",data:{}};
         res.status(500).send(resp);
+        next(error);
     }
 }
 
-const loginUser = async (req: Request, res: Response,) => {
+const loginUser = async (req: Request, res: Response,next:NextFunction) => {
 
     let resp: ReturnResponse;
     try {
@@ -55,17 +58,16 @@ const loginUser = async (req: Request, res: Response,) => {
                 const  token = jwt.sign({userId:user._id},"secretkey",{expiresIn: "1h"});
                 resp = { status: "success", message: "Logged in", data: {token} };
                 res.send(resp);
-            } else {
-                resp = { status: "error", message: "User and password is incorrect", data: {} };
-                res.send(resp);
+            } else { 
+                const err =new ProjectError("User not found");
+                err.statusCode = 401;
+                throw err;
             }
 
         }
 
     } catch (error) {
-        resp = { status: "error", message: "Something went wrong", data: {} };
-        res.status(420).send(resp);
-        console.log(error);
+        next(error);
     }
 
 }
