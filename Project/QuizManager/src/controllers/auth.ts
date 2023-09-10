@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 interface ReturnResponse{
     status:"success" | "error",
     message:String,
-    data:{}
+    data:{} | []
 }
 
 const registerUser=async (req:Request,res:Response,next:NextFunction)=>{
@@ -31,9 +31,6 @@ const registerUser=async (req:Request,res:Response,next:NextFunction)=>{
         }
         
     } catch (error) {
-        //console.log(error);
-        resp={status:"error",message:"Something went wrong",data:{}};
-        res.status(500).send(resp);
         next(error);
     }
 }
@@ -48,8 +45,10 @@ const loginUser = async (req: Request, res: Response,next:NextFunction) => {
         // find user with email -- 
         const user = await User.findOne({ email });
         if (!user) {
-            resp = { status: "error", message: "User not found", data: {} };
-            res.send(resp);
+            const err =new ProjectError("User not exist");
+           err.statusCode = 401;
+           throw err;
+
         } else {
 
             const status = await bcrypt.compare(password, user.password);
@@ -59,7 +58,7 @@ const loginUser = async (req: Request, res: Response,next:NextFunction) => {
                 resp = { status: "success", message: "Logged in", data: {token} };
                 res.send(resp);
             } else { 
-                const err =new ProjectError("User not found");
+                const err =new ProjectError("credential mismatch");
                 err.statusCode = 401;
                 throw err;
             }

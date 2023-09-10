@@ -22,7 +22,7 @@ const getUser = async (req: Request, res: Response, next:NextFunction) =>{
 
         const user = await User.findById(userId,{name:1,email:1});
         if (!user){
-            const err =new ProjectError("User not found!");
+            const err =new ProjectError("No User Exist");
             err.statusCode = 401;
             throw err;
         }else{ 
