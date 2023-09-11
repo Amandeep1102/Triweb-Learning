@@ -4,6 +4,6 @@ import { isAuthenticated } from "../middleware/isAuth";
 
 const router=express.Router();
 
-router.get("/:reportId",isAuthenticated, getReport);
+router.get("/:reportId?",isAuthenticated, getReport);
 
 export default router;

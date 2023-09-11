@@ -3,11 +3,7 @@ import Quiz from "../models/quiz";
 import ProjectError from "../helper/error";
 import { validationResult } from "express-validator/src/validation-result";
 
-interface ReturnResponse{
-    status:"success" | "error",
-    message:String,
-    data:{} | []
-}
+import { ReturnResponse } from "../utils/interfaces";
 
 const createQuiz=async (req:Request, res:Response, next:NextFunction) =>{
     try {

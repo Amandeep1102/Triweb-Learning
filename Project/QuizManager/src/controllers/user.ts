@@ -3,11 +3,8 @@ import ProjectError from '../helper/error';
 
 import User from '../models/user';
 
-interface ReturnResponse{
-    status:"success" | "error",
-    message:String,
-    data:{} | []
-}
+import { ReturnResponse } from "../utils/interfaces";
+
 
 const getUser = async (req: Request, res: Response, next:NextFunction) =>{
     let resp:ReturnResponse;
