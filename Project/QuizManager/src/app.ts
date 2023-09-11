@@ -2,6 +2,7 @@
 import { Request, Response , NextFunction} from "express";
 import express from 'express';
 import mongoose from 'mongoose';
+import reportRoute from './routes/report';
 import examRoute from './routes/exam';
 
 import ProjectError from './helper/error';
@@ -36,6 +37,8 @@ app.get('/',(req,res) => {
 app.use('/user',userRoute);
 
 app.use('/exam',examRoute);
+
+app.use('/report', reportRoute);
 
 app.use('/auth',authRoute);
 
