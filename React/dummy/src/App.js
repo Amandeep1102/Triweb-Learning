@@ -1,7 +1,12 @@
+import FirstComponent from "./components/Firstcomponent";
 
 function App() {
-  return (
-    <div>  my  react application</div>
+  return ( 
+    <div>  
+      <FirstComponent owner="Aman" reason="Demo"/>
+      
+      <FirstComponent owner="dev" reason="try"/>
+    </div>
   );
 }
 
