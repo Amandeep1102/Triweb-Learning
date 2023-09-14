@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express"
 import Quiz from "../models/quiz";
 import ProjectError from "../helper/error";
 import { validationResult } from "express-validator/src/validation-result";
-
 import { ReturnResponse } from "../utils/interfaces";
 
 const createQuiz=async (req:Request, res:Response, next:NextFunction) =>{
@@ -49,7 +48,11 @@ const getQuiz=async (req:Request, res:Response, next:NextFunction) =>{
             throw err;
         }
 
-        const resp:ReturnResponse={status:"success", message:"Quiz retrieved successfully", data:{quiz}};
+        const resp:ReturnResponse={
+            status:"success", 
+            message:"Quiz retrieved successfully", 
+            data:{quiz}
+        };
         res.status(201).send(resp);
 
     } catch (error) {
@@ -88,8 +91,13 @@ const updateQuiz=async (req:Request, res:Response, next:NextFunction) =>{
         quiz.name=req.body.name;
         quiz.questions_list=req.body.questions_list;
         quiz.answers=req.body.answers;
+
         await quiz.save();
-        const resp:ReturnResponse={status:"success", message:"Quiz updated successfully", data:{}};
+
+        const resp:ReturnResponse={
+        status:"success", 
+        message:"Quiz updated successfully", 
+        data:{}};
         res.status(200).send(resp);
 
     } catch (error) {
@@ -117,7 +125,10 @@ const deleteQuiz=async (req:Request, res:Response, next:NextFunction) =>{
             throw err;
         }
         await Quiz.deleteOne({_id:quizId});
-        const resp:ReturnResponse={status:"success", message:"Quiz deleted successfully", data:{}};
+        const resp:ReturnResponse={status:"success", 
+        message:"Quiz deleted successfully", 
+        data:{}
+        };
         res.status(200).send(resp);
     } catch (error) {
         next(error);
@@ -128,6 +139,7 @@ const publishQuiz=async (req:Request, res:Response, next:NextFunction) =>{
     try {
         const quizId=req.body.quizId;
         const quiz=await Quiz.findById(quizId);
+
         if(!quiz){
             const err=new ProjectError("Quiz not found");
             err.statusCode=404;
@@ -141,7 +153,10 @@ const publishQuiz=async (req:Request, res:Response, next:NextFunction) =>{
 
     quiz.is_published=true;
     await quiz.save();
-    const resp:ReturnResponse={status:"success", message:"Quiz published", data:{}};
+    const resp:ReturnResponse={
+    status:"success",
+    message:"Quiz published", 
+    data:{}};
     res.status(200).send(resp);
     }
      catch (error) {

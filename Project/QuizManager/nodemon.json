@@ -1,0 +1,9 @@
+{
+    "env":{
+        "CONNECTION_STRING":"mongodb+srv://Amandeep_singh:newpass@myfirstdb.t4wd6mg.mongodb.net/",
+        "PORT":3000
+    },
+    "watch":["src"],
+    "ext":"ts,json",
+    "exec":"ts-node ./src/app.ts"
+}

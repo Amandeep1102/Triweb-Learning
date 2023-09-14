@@ -1,26 +1,14 @@
-import { NextFunction, Request, Response } from "express";
+import {Request, Response,  NextFunction} from "express";
 import bcrypt from 'bcryptjs';
-
 import ProjectError from '../helper/error';
 import User from '../models/user';
 import jwt from 'jsonwebtoken';
-
 import {validationResult} from "express-validator";
-
 import { ReturnResponse } from "../utils/interfaces";
 
 const registerUser=async (req:Request,res:Response,next:NextFunction)=>{
     let resp:ReturnResponse;
     try {
-
-        const validationError = validationResult(req);
-
-        if(!validationError.isEmpty()){
-            const err = new ProjectError("Validation failed!");
-            err.statusCode = 422;
-            err.data = validationError.array();
-            throw err;
-        }
         const email=req.body.email;
         const name=req.body.name;
         const password= await bcrypt.hash(req.body.password,12);
@@ -39,15 +27,6 @@ const registerUser=async (req:Request,res:Response,next:NextFunction)=>{
     } catch (error) {
         next(error);
     }
-1 }
-
-const isUserExists = async(email:String) => {
-    const user = await User.findOne({email});
-
-    if(!user){
-        return false;
-    }
-    return true;
 }
 
 const loginUser = async (req: Request, res: Response,next:NextFunction) => {
@@ -57,34 +36,42 @@ const loginUser = async (req: Request, res: Response,next:NextFunction) => {
         const email = req.body.email;
         const password = req.body.password;
 
-        // find user with email -- 
         const user = await User.findOne({ email });
-        if (!user) {
-            const err =new ProjectError("User not exist");
-           err.statusCode = 401;
-           throw err;
 
-        } else {
-
+        if(user!==null){
             const status = await bcrypt.compare(password, user.password);
+            if(status){
 
-            if (status) {
-                const  token = jwt.sign({userId:user._id},"secretkey",{expiresIn: "1h"});
-                resp = { status: "success", message: "Logged in", data: {token} };
-                res.send(resp);
-            } else { 
-                const err =new ProjectError("credential mismatch");
+                const token = jwt.sign({userId:user._id}, "secretKey", {expiresIn:'1h'});
+
+                resp = {status:"success", message:"Logged In!", data:{token}};
+                res.status(200).send(resp);
+            }
+            else{
+                const err =new ProjectError("Credentials mismatch!");
                 err.statusCode = 401;
                 throw err;
             }
-
         }
-
+        else{
+            const err =new ProjectError("User not found!");
+            err.statusCode = 401;
+            throw err;
+        }   
     } catch (error) {
         next(error);
     }
 
-2}
+}
 
+
+const isUserExists = async(email:String) => {
+    const user = await User.findOne({email});
+
+    if(!user){
+        return false;
+    }
+    return true;
+}
 
 export {registerUser, loginUser , isUserExists};

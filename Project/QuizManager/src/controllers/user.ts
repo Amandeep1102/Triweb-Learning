@@ -1,8 +1,6 @@
 import { Request, Response,NextFunction } from "express";
 import ProjectError from '../helper/error';
-
 import User from '../models/user';
-
 import { ReturnResponse } from "../utils/interfaces";
 
 
@@ -42,6 +40,7 @@ const updateUser=async (req:Request, res:Response,next:NextFunction)=>{
             }
             const userId=req.body._id;
             const user=await User.findById(userId);
+            
             if(!user){
                 const err =new ProjectError("User not found!");
                 err.statusCode = 401;

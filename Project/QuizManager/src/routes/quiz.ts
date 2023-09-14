@@ -55,24 +55,11 @@ router.put("/", isAuthenticated, [
         })
 ], updateQuiz);
 
-router.put("/",(req,res)=>{
-    res.send("updated");
-})
+
 router.put("/", isAuthenticated, updateQuiz);
 
-
-
-router.delete("/:quizId",(req,res)=>{
-    res.send("deleted");
-})
 router.delete("/:quizId", isAuthenticated, deleteQuiz);
 
-
-router.patch("/patch",(req,res)=>{
-    res.send("published");
-})
 router.patch("/patch", isAuthenticated , publishQuiz);
-
-
 
 export default router;

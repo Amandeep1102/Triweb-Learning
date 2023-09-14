@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import ProjectError from '../helper/error';
 
 const isAuthenticated = (req:Request,res:Response, next:NextFunction)=> {
-    let isUserAuthenticated = false;
+    
     try {
         let isUserAuthenticated = false;
 
