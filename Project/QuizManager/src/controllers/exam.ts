@@ -26,9 +26,6 @@ const startExam=async (req:Request, res:Response, next:NextFunction)=>{
 }
 
 const submitExam=async (req:Request, res:Response, next:NextFunction)=>{
-    const quizId=req.body.quizId;
-    const attempted_questions=req.body.attempted_questions;
-    const quiz=await Quiz.findById(quizId, {answers:1});
     try {
         const quizId=req.body.quizId;
         const attempted_questions=req.body.attempted_questions;
@@ -40,7 +37,6 @@ const submitExam=async (req:Request, res:Response, next:NextFunction)=>{
         }
         const userId=req.userId;
         const answers=quiz.answers;
-        res.send(answers);
         const allQuestions=Object.keys(answers);
         const total=allQuestions.length;
         let score=0;
@@ -53,7 +49,7 @@ const submitExam=async (req:Request, res:Response, next:NextFunction)=>{
 
         const report=new Report({userId, quizId, score, total});
         const data=await report.save();
-      const resp:ReturnResponse={status:"success", message:"Quiz Submitted", data:{total, score, resultId:data._id}};
+        const resp:ReturnResponse={status:"success", message:"Quiz Submitted", data:{total, score, resultId:data._id}};
         res.status(200).send(resp);
     } catch (error) {
         next(error);

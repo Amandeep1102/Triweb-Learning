@@ -30,7 +30,8 @@ const getUser = async (req: Request, res: Response, next:NextFunction) =>{
     }
     
 
-const updateUser=async (req:Request, res:Response,next:NextFunction)=>{
+
+    const updateUser = async(req:Request,res:Response,next:NextFunction) => {
         let resp:ReturnResponse;
         try {
             if(req.userId!=req.body._id){
@@ -38,24 +39,25 @@ const updateUser=async (req:Request, res:Response,next:NextFunction)=>{
                 err.statusCode = 401;
                 throw err; 
             }
-            const userId=req.body._id;
-            const user=await User.findById(userId);
-            
+    
+            const userId = req.body._id;
+            const user = await User.findById(userId);
+    
             if(!user){
                 const err =new ProjectError("User not found!");
                 err.statusCode = 401;
                 throw err;
             }
             else{
-                user.name=req.body.name;
-                user.email=req.body.email;
+                user.name = req.body.name;
                 await user.save();
-                resp={status:"success",message:"User Updated",data:{}};
+                resp = {status:"success", message:"User updated!", data:{}};
                 res.send(resp);
             }
+            
         } catch (error) {
             next(error);
         }
+        
     }
-
 export { getUser, updateUser };

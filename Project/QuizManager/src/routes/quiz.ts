@@ -28,9 +28,7 @@ router.post("/", isAuthenticated, [
         })
 ], createQuiz);
 
-
-router.get("/:quizId", isAuthenticated, deleteQuiz);
-
+router.get("/:quizId", isAuthenticated, getQuiz);
 
 router.put("/", isAuthenticated, [
     body('name')
@@ -55,11 +53,8 @@ router.put("/", isAuthenticated, [
         })
 ], updateQuiz);
 
-
-router.put("/", isAuthenticated, updateQuiz);
-
 router.delete("/:quizId", isAuthenticated, deleteQuiz);
 
-router.patch("/patch", isAuthenticated , publishQuiz);
+router.patch('/publish', isAuthenticated, publishQuiz);
 
 export default router;

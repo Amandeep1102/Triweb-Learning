@@ -7,13 +7,6 @@ import { ReturnResponse } from "../utils/interfaces";
 const createQuiz=async (req:Request, res:Response, next:NextFunction) =>{
     try {
 
-        const validationError=validationResult(req);
-        if(!validationError.isEmpty()){
-            const err=new ProjectError("Validation Failed");
-            err.statusCode=422; 
-            err.data=validationError.array();
-            throw err;
-        }
 
         const created_by=req.userId;
         const name=req.body.name;
@@ -28,38 +21,41 @@ const createQuiz=async (req:Request, res:Response, next:NextFunction) =>{
     } catch (error) {
         next(error);
     }
-}
+};
 
-
-const getQuiz=async (req:Request, res:Response, next:NextFunction) =>{
+const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const quizId=req.params.quizId;
-        const quiz=await Quiz.findById(quizId,{name:1, questions_list:1, answers:1, created_by:1});
+        const quizId = req.params.quizId;
+        const quiz = await Quiz.findById(quizId, {
+            name: 1,
+            questions_list: 1,
+            answers: 1,
+            created_by: 1,
+        });
 
-        if(!quiz){
-            const err=new ProjectError("Quiz not found");
-            err.statusCode=404;
+        if (!quiz) {
+            const err = new ProjectError("Quiz not found!");
+            err.statusCode = 404;
             throw err;
         }
 
-        if(req.userId!==quiz.created_by.toString()){
-            const err=new ProjectError("You are not Authorized");
-            err.statusCode=403;
+        if (req.userId !== quiz.created_by.toString()) {
+            const err = new ProjectError("You are not authorized!");
+            err.statusCode = 403;
             throw err;
         }
 
-        const resp:ReturnResponse={
-            status:"success", 
-            message:"Quiz retrieved successfully", 
-            data:{quiz}
+        const resp: ReturnResponse = {
+            status: "success",
+            message: "Quiz",
+            data: quiz,
         };
-        res.status(201).send(resp);
-
+        res.status(200).send(resp);
     } catch (error) {
         next(error);
     }
-}
 
+};
 const updateQuiz=async (req:Request, res:Response, next:NextFunction) =>{    
     try {
         const validationError=validationResult(req);
@@ -103,7 +99,7 @@ const updateQuiz=async (req:Request, res:Response, next:NextFunction) =>{
     } catch (error) {
         next(error);
     }
-}
+};
 
 const deleteQuiz=async (req:Request, res:Response, next:NextFunction) =>{
     try {
@@ -133,35 +129,35 @@ const deleteQuiz=async (req:Request, res:Response, next:NextFunction) =>{
     } catch (error) {
         next(error);
     }
-}
+};
 
-const publishQuiz=async (req:Request, res:Response, next:NextFunction) =>{
+const publishQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const quizId=req.body.quizId;
-        const quiz=await Quiz.findById(quizId);
+        const quizId = req.body.quizId;
+        const quiz = await Quiz.findById(quizId);
 
-        if(!quiz){
-            const err=new ProjectError("Quiz not found");
-            err.statusCode=404;
+        if (!quiz) {
+            const err = new ProjectError("Quiz not found!");
+            err.statusCode = 404;
             throw err;
-    }
-    if(req.userId!==quiz.created_by.toString()){
-        const err=new ProjectError("You are not Authorized");
-        err.statusCode=403;
-        throw err;
-    }
+        }
+        
+        if (req.userId !== quiz.created_by.toString()) {
+            const err = new ProjectError("You are not authorized!");
+            err.statusCode = 403;
+            throw err;
+        }
 
-    quiz.is_published=true;
-    await quiz.save();
-    const resp:ReturnResponse={
-    status:"success",
-    message:"Quiz published", 
-    data:{}};
-    res.status(200).send(resp);
-    }
-     catch (error) {
+        quiz.is_published = true;
+        await quiz.save();
+        const resp: ReturnResponse = {
+            status: "success",
+            message: "Quiz published!",
+            data: {},
+        };
+        res.status(200).send(resp);
+    } catch (error) {
         next(error);
     }
-}
-
+};
 export {createQuiz, getQuiz, updateQuiz, deleteQuiz, publishQuiz};
