@@ -27,3 +27,10 @@ const resultSchema=new schema(
 const Report =mongoose.model('Report',resultSchema);
 
 export default Report;
+
+
+
+
+
+
+
