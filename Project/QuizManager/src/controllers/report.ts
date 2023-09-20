@@ -9,6 +9,7 @@ const getReport=async (req:Request, res:Response, next:NextFunction)=>{
         if(!!req.params.reportId){
             const reportId=req.params.reportId;
             report= await Report.findById(req.params.reportId);
+            
             if(report && report.userId.toString()!=req.userId){
                 const err=new ProjectError("You are not allowed to visit the scores");
                 err.statusCode=405;
