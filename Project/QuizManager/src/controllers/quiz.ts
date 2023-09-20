@@ -25,13 +25,25 @@ const createQuiz=async (req:Request, res:Response, next:NextFunction) =>{
 
 const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const quizId = req.params.quizId;
-        const quiz = await Quiz.findById(quizId, {
+        let quiz;
+        if(!!req.params.quizId){
+            const quizId = req.params.quizId;
+            quiz = await Quiz.findById(quizId, {
             name: 1,
             questions_list: 1,
             answers: 1,
             created_by: 1,
-        });
+            });
+
+            if (quiz && req.userId !== quiz.created_by.toString()) {
+                const err = new ProjectError("You are not authorized!");
+                err.statusCode = 403;
+                throw err;
+            }
+        }
+        else{
+            quiz=await Quiz.find({created_by:req.userId});
+        }
 
         if (!quiz) {
             const err = new ProjectError("Quiz not found!");
@@ -39,11 +51,6 @@ const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
             throw err;
         }
 
-        if (req.userId !== quiz.created_by.toString()) {
-            const err = new ProjectError("You are not authorized!");
-            err.statusCode = 403;
-            throw err;
-        }
 
         const resp: ReturnResponse = {
             status: "success",
@@ -55,7 +62,8 @@ const getQuiz = async (req: Request, res: Response, next: NextFunction) => {
         next(error);
     }
 
-};
+}
+
 const updateQuiz=async (req:Request, res:Response, next:NextFunction) =>{    
     try {
         const validationError=validationResult(req);
