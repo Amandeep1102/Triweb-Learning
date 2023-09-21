@@ -2,12 +2,12 @@ import ProductItem from "./productitem";
 import Styles from './ProductList.module.css';
 
 function productlist(props){
-    return <div className={Styles.list}>
+    return <ul className={Styles.list}>
         {props.products.map((item)=>{
-            return <ProductItem item={item}/>
+            return <ProductItem key={item.id} id={item.id} item={item}/>
         })}
-
-        </div>
+        
+        </ul>
 }
 
 export default productlist;

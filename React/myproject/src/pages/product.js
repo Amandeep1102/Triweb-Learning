@@ -23,9 +23,7 @@ function Product(){
         }
        ]
     return <div>
-       <ul>
         <productlist products={products}/>
-        </ul>
     </div>
 }
 

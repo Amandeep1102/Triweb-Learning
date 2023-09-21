@@ -5,10 +5,10 @@ function MainMenu(){
     return <header className={MainMenuStyle.header}>
         <nav>
             <ul>
-                <li><Link to="/">home</Link></li>
-                <li><Link to="/about">about</Link></li>
-                <li><Link to="/contact">contact</Link></li>
-                
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
+                <li><Link to="/product">Product</Link></li>
             </ul>
         </nav> 
     </header>
