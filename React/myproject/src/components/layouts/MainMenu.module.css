@@ -2,7 +2,7 @@
 .header {
     background-color: rgb(210, 104, 224);
     border-radius: 8px;
-    border:1.5px solid #531010;
+    border:1.5px solid #000000;
     padding: 10px 0;
     height: 5vh;
     margin-bottom: 18px;
@@ -26,12 +26,12 @@
   .header nav ul li a {
     text-decoration: none;
     font-size: large;
-    color: #ffe2cd;
+    color: #361600;
     font-weight: bold;
     transition: color 0.3s ease;
   }
 
   /* Hover effect for links */
   .header nav ul li a:hover {
-    color: #820077;
+    color: #e089d9;
   }
