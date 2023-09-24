@@ -1,0 +1,7 @@
+.Wrapper{
+    padding: 20px;
+    background-color: rgb(249, 211, 211);
+    margin-bottom: 18px;
+    box-shadow:5px 5px 10px black;
+    border-radius: 6px;
+}

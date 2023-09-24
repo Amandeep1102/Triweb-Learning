@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import AddProductForm from "./components/lay/product/AddProductForm"
-
+import AddProductForm from "../components/Product/AddProductForm";
 const AddProduct = () => {
     const navigate = useNavigate();
     const addProductHandler = (newProduct) =>{
