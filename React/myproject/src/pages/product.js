@@ -1,30 +1,35 @@
-function Product(){
-    let products=[
-        {
-            id:'p1',
-            product_name:"City Tour",
-            image:"/images/city.jpeg",
-            description:"It's a good tour",
-            price:"20000"
-        },
-        {
-            id:'p2',
-            product_name:"Forest Tour",
-            image:"/images/forest.jpeg",
-            description:"It's a nature tour",
-            price:"50000"
-        },
-        {
-            id:'p3',
-            product_name:"River side Tour",
-            image:"/images/river.jpeg",
-            description:"It's a river side tour",
-            price:"30000"
-        }
-       ]
-    return <div>
-        <productlist products={products}/>
-    </div>
+import { useEffect, useState } from "react";
+
+import Productlist from "../components/Product/ProductList";
+
+function Product() {
+    let [products, setProducts] = useState([]);
+    let [isDataFetching, setIsDataFetching] = useState(true);
+
+    useEffect(() => {
+        setIsDataFetching(true);
+        fetch('http://127.0.0.1:3004/product')
+            .then(response => response.json())
+            .then(responseData => {
+                setIsDataFetching(false);
+                setProducts(responseData.data)
+            })
+            .catch(err => console.log(err));
+    }, [])
+
+
+    if (isDataFetching) {
+        return (
+            <div>
+                Loading . . .
+            </div>
+        )
+    };
+    return (
+        <div>
+            <Productlist products={products} />
+        </div>
+    )
 }
 
 export default Product;
